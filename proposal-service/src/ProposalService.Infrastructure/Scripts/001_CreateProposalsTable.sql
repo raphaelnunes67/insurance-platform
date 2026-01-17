@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS Proposals (
+    Id UUID PRIMARY KEY,
+    CreatedAt TIMESTAMP NOT NULL,
+    UpdatedAt TIMESTAMP NOT NULL,
+    CustomerName TEXT NOT NULL,
+    Status TEXT NOT NULL,
+    IsuredAmount DECIMAL(18,2) NOT NULL
+);

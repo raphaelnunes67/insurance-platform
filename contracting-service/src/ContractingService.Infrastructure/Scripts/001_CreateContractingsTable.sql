@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS contracting (
+    id UUID PRIMARY KEY,
+    customerName VARCHAR(200) NOT NULL,
+    insuredAmount DECIMAL(18,2) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    modified_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    contracted_at TIMESTAMP WITH TIME ZONE NULL    
+)

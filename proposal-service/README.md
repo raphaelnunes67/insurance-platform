@@ -1,3 +1,5 @@
+```
+
 Project/
 ├── src/
 │ ├── ProposalService.Api/
@@ -36,3 +38,8 @@ Project/
 │
 └── tests/
 └── ProposalService.UnitTests/
+```
+
+
+
+dotnet run

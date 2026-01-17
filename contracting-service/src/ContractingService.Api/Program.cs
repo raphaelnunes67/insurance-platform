@@ -1,23 +1,23 @@
 using System.Data;
-using Npgsql; 
-using ProposalService.Application.Interfaces;
-using ProposalService.Application.Services;
-using ProposalService.Infrastructure;
-using ProposalService.Infrastructure.Repositories; 
-using ProposalService.Domain.Interfaces;
-using ProposalService.Infrastructure.Messaging;
+using Npgsql;
+using ContractingService.Application.Interfaces;
+using ContractingService.Application.Services; 
+using ContractingService.Infrastructure;      
+using ContractingService.Infrastructure.Repositories; 
+using ContractingService.Domain.Interfaces;
+using ContractingService.Api.Workers;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHostedService<ProposalApprovedConsumer>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddScoped<IDbConnection>(sp => new NpgsqlConnection(connectionString));
 
-builder.Services.AddScoped<IProposalRepository, ProposalRepository>();
+builder.Services.AddScoped<IContractRepository, ContractingRepository>();
 
-builder.Services.AddScoped<IEventBus, RabbitMqEventBus>();
-
-builder.Services.AddScoped<IProposalService, ProposalService.Application.Services.ProposalService>();
+builder.Services.AddScoped<IContractService, ContractingService.Application.Services.ContractService>();
 
 builder.Services.AddSingleton<DatabaseBootstrap>();
 
@@ -37,7 +37,7 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Falha ao iniciar o banco de dados: {ex.Message}");
+        Console.WriteLine($"Fail to start database: {ex.Message}");
     }
 }
 
@@ -46,6 +46,7 @@ using (var scope = app.Services.CreateScope())
 //     app.UseSwagger();
 //     app.UseSwaggerUI();
 // }
+
 
 app.UseSwagger();
 app.UseSwaggerUI();
