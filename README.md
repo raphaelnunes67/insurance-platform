@@ -154,3 +154,26 @@ Portainer: Access at http://localhost:9000 (or configured port).
 PgAdmin: Access at http://localhost:5050 (or configured port).
 
 RabbitMQ Management: Access at http://localhost:15672 (or configured port).
+
+
+# 🧪 Running Tests
+
+This project utilizes **xUnit** and **Moq** for Unit Testing. The tests focus on the Application and Domain layers, isolating business logic from external dependencies (Infrastructure).
+
+**Note:** You **do not** need Docker or a running database to execute these tests, as all external dependencies are mocked.
+
+To run the tests, navigate to the service root directory (where the `.sln` file is located) and run:
+
+**Contracting Service:**
+
+```bash
+cd contracting-service
+dotnet test
+```
+
+**Proposal Service:**
+
+```bash
+cd proposal-service
+dotnet test
+```

@@ -76,16 +76,13 @@ public class ProposalService : IProposalService
 
     public async Task UpdateProposalAsync(Guid id, UpdateProposalDto dto)
     {
-        // 1. Busca a entidade
         var proposal = await _proposalRepository.GetByIdAsync(id);
 
         if (proposal is null)
             throw new KeyNotFoundException($"Proposta {id} não encontrada.");
 
-        // 2. Chama o Domínio (que valida se o Status permite edição)
         proposal.UpdateInformation(dto.CustomerName, dto.InsuredAmount);
 
-        // 3. Salva no banco
         await _proposalRepository.UpdateAsync(proposal);
     }
 }
